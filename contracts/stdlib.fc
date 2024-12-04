@@ -633,6 +633,9 @@ int get_seed() impure asm "RANDSEED";
 
 ;;; Checks whether the data parts of two slices coinside
 int equal_slices_bits(slice a, slice b) asm "SDEQ";
+
+int equal_slices(slice a, slice b) asm "SDEQ";
+
 ;;; Checks whether b is a null. Note, that FunC also has polymorphic null? built-in.
 int builder_null?(builder b) asm "ISNULL";
 ;;; Concatenates two builders
@@ -733,7 +736,7 @@ builder store_msg_flags_and_address_none(builder b, int msg_flags) inline {
 }
 ;;; @param `msg_flags` - 4-bit
 int is_bounced(int msg_flags) inline {
-    return msg_flags & 1 == 1;
+    return msg_flags & 1;
 }
 
 (slice, ()) ~skip_bounced_prefix(slice s) inline {
